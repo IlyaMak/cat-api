@@ -10,6 +10,13 @@ $url = "url: {$decodedJson[0]['url']}";
 $width = "width: {$decodedJson[0]['width']}px";
 $height = "height: {$decodedJson[0]['height']}px";
 file_put_contents('json.txt', "$id\n$url\n$width\n$height\n\n", FILE_APPEND);
+if ($file = fopen('json.txt', 'r')) {
+  while (!feof($file)) {
+    $line = fgets($file);
+    echo $line;
+  }
+  fclose($file);
+}
 ?>
 
 <!DOCTYPE html>
@@ -21,12 +28,8 @@ file_put_contents('json.txt', "$id\n$url\n$width\n$height\n\n", FILE_APPEND);
   <title>Cat API</title>
 </head>
 
-<body>
-    <div><?= $id ?></div>
-    <div><?= $url ?></div>
-    <div><?= $width ?></div>
-    <div><?= $height ?></div>
-  <img src="<?= $decodedJson[0]['url'] ?>" width="500px" alt="cat">
+<body style="white-space: pre;">
+
 </body>
 
 </html>
